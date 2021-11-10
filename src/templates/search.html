@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/index.css">
+    <style>
+        input.search[type="text"] {
+            padding: 16px;
+            font-size: 20px;
+            float: left;
+            width: 100%;
+            background: #F2F2F7;
+            border-radius: 16px;
+            border-width: 0px;
+            font-family: 'Source Sans Pro', sans-serif;
+            margin-right: 16px;
+        }
+
+        button.search[type="submit"] {
+            float: left;
+            width: 100px;
+            padding: 12px;
+            background: #4285F4;
+            font-size: 17px;
+            border-radius: 16px;
+            border-width: 0px;
+            cursor: pointer;
+        }
+
+        button.search:hover {
+            background: #609CFF;
+        }
+
+        div.result {
+            display: block;
+            text-align: left;
+            width: 800px;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex;flex-direction: column;align-items: center;">
+
+        <form method="GET" style="display: flex;flex-direction: row;justify-content: center;align-items: center;width: 800px">
+            <input class="search" type="text" name="q" placeholder="Enter cryptocurrency" value={{ query }}>
+            <button class="search" type="submit">
+                Search
+            </button>
+        </form>
+
+        {% if data|length %}
+            {% for item in data %}
+                <div class="result">
+                    <a href={{ item['url'] }}>
+                        <h3 style="display: inline-block;">
+                            {{ item['heading'] }}
+                        </h3>
+                    </a>
+                    <div>
+                        <span>
+                            {{ item['paragraph'] }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="result">
+                <h3 style="display: inline-block;">
+                    Not found "{{ query }}"
+                </h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
